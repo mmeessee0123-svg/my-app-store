@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,81 +7,48 @@
     body{margin:0;font-family:Tajawal,Arial;background:#0f172a;color:#e5e7eb}
     header{background:#020617;padding:20px;text-align:center}
     header h1{margin:0;font-size:28px}
-    nav{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:15px}
-    nav button{background:#1f2937;color:#e5e7eb;border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-size:14px}
-    nav button.active{background:#22c55e;color:#020617}
-    main{max-width:1100px;margin:auto;padding:20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-    .card{background:#020617;border:1px solid #1f2937;border-radius:18px;padding:14px}
-    .card img{width:100%;height:140px;object-fit:cover;border-radius:12px}
-    .card h3{margin:10px 0 6px 0;font-size:16px}
-    .card p{font-size:13px;color:#9ca3af;margin:0}
-    footer{background:#020617;text-align:center;padding:16px;color:#9ca3af;margin-top:30px}
-    footer a{color:#22c55e;text-decoration:none;font-weight:bold}
+    header p{margin:8px 0 0;color:#94a3b8}.cats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:20px}
+.cats button{padding:10px 16px;border:none;border-radius:20px;background:#1f2937;color:#e5e7eb;cursor:pointer}
+.cats button.active{background:#38bdf8;color:#020617}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;padding:20px}
+.card{background:#020617;border:1px solid #1f2937;border-radius:18px;padding:14px;text-align:center}
+.card img{width:100%;height:160px;object-fit:cover;border-radius:14px}
+.card h3{margin:10px 0 6px;font-size:18px}
+.card p{margin:6px 0;font-size:14px;color:#cbd5f5}
+.card a{display:inline-block;margin-top:10px;padding:10px 16px;border-radius:20px;background:#22c55e;color:#020617;text-decoration:none;font-weight:bold}
+
+footer{margin-top:30px;padding:16px;text-align:center;color:#94a3b8;font-size:14px}
+
   </style>
 </head>
-<body>
-
-<header>
+<body><header>
   <h1>📱 متجر تطبيقات</h1>
-  <nav>
-    <button class="active" onclick="filterApps('all',this)">الكل</button>
-    <button onclick="filterApps('tools',this)">الأدوات</button>
-    <button onclick="filterApps('games',this)">الألعاب</button>
-    <button onclick="filterApps('social',this)">تواصل</button>
-    <button onclick="filterApps('other',this)">أخرى</button>
-  </nav>
-</header>
+  <p>تحميل التطبيقات والألعاب بسهولة</p>
+</header><div class="cats">
+  <button class="active" onclick="filterApps('all',this)">الكل</button>
+  <button onclick="filterApps('tools',this)">الأدوات</button>
+  <button onclick="filterApps('games',this)">الألعاب</button>
+  <button onclick="filterApps('social',this)">تواصل</button>
+  <button onclick="filterApps('other',this)">أخرى</button>
+</div><div class="grid" id="apps">
+  <!-- 🔒 لا تعدّل أي شي فوق أو تحت -->
+  <!-- APPS GO HERE -->
+  <!-- 🔒 الإضافة تكون فوق هذا السطر فقط -->
+</div><footer>
+  © متجر تطبيقات | Telegram: <a href="https://t.me/Yhh04" target="_blank" style="color:#38bdf8">@Yhh04</a>
+</footer><script>
+function filterApps(cat,btn){
+  document.querySelectorAll('.cats button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
 
-<main>
-  <div class="grid" id="apps">
-
-    <!-- مثال تطبيق -->
-    <div class="card" data-category="tools">
-      <img src="https://via.placeholder.com/300x200" alt="app">
-      <h3>تطبيق أدوات</h3>
-      <p>تطبيق تجريبي ضمن فئة الأدوات</p>
-    </div>
-
-    <div class="card" data-category="games">
-      <img src="https://via.placeholder.com/300x200" alt="app">
-      <h3>لعبة ممتعة</h3>
-      <p>لعبة تجريبية</p>
-    </div>
-
-    <div class="card" data-category="social">
-      <img src="https://via.placeholder.com/300x200" alt="app">
-      <h3>تطبيق تواصل</h3>
-      <p>تواصل مع أصدقائك</p>
-    </div>
-
-    <div class="card" data-category="other">
-      <img src="https://via.placeholder.com/300x200" alt="app">
-      <h3>تطبيق آخر</h3>
-      <p>ضمن فئة أخرى</p>
-    </div>
-
-  </div>
-</main>
-
-<footer>
-  جميع الحقوق محفوظة © متجر تطبيقات <br>
-  Telegram: <a href="https://t.me/Yhh04" target="_blank">@Yhh04</a>
-</footer>
-
-<script>
-  function filterApps(category,btn){
-    document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.card').forEach(card=>{
-      if(category==='all' || card.dataset.category===category){
-        card.style.display='block';
-      }else{
-        card.style.display='none';
-      }
-    });
-  }
-</script>
-
-</body>
+  document.querySelectorAll('.card').forEach(card=>{
+    if(cat==='all' || card.dataset.category===cat){
+      card.style.display='block';
+    }else{
+      card.style.display='none';
+    }
+  });
+}
+</script></body>
 </html>
