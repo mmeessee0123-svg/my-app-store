@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة الأدمن | متجر تطبيقات</title>
+  <style>
+    body{margin:0;font-family:Tajawal,Arial;background:#0f172a;color:#e5e7eb}
+    .container{max-width:750px;margin:40px auto;background:#020617;border:1px solid #1f2937;border-radius:20px;padding:20px}
+    h1{text-align:center;margin-top:0}
+    label{display:block;margin-top:14px;font-size:14px}
+    input,select,textarea{width:100%;padding:10px;margin-top:6px;border-radius:10px;border:none;background:#111827;color:#e5e7eb}
+    textarea{resize:vertical;min-height:70px}
+    button{margin-top:18px;width:100%;padding:12px;border:none;border-radius:12px;background:#22c55e;color:#020617;font-size:16px;cursor:pointer}
+    .output{margin-top:20px}
+    .output textarea{height:200px;font-family:monospace}
+    .note{font-size:13px;color:#9ca3af;margin-top:10px;text-align:center}
+    .warn{font-size:13px;color:#fbbf24;margin-top:6px}
+  </style>
+</head>
+<body><div class="container">
+  <h1>🔐 صفحة الأدمن (نظام ID)</h1><label>اسم التطبيق (يظهر للزائر)</label> <input id="name" placeholder="مثال: واتساب بلس">
+
+<label>المعرّف ID (إنكليزي فقط – بدون مسافات)</label> <input id="id" placeholder="whatsapp_plus">
+
+  <div class="warn">هذا الاسم يُستخدم للمجلدات والملفات – لا تغيّره بعد النشر</div><label>وصف التطبيق</label>
+
+  <textarea id="desc" placeholder="وصف قصير للتطبيق"></textarea><label>الفئة</label> <select id="cat"> <option value="tools">الأدوات</option> <option value="games">الألعاب</option> <option value="social">تواصل</option> <option value="other">أخرى</option> </select>
+
+<label>ملف صورة الغلاف</label> <input id="img" type="file" accept="image/*">
+
+<label>ملف التطبيق APK</label> <input id="apk" type="file" accept=".apk">
+
+<button onclick="generate()">إنشاء ونسخ كود التطبيق</button>
+
+  <div class="output">
+    <label>الكود الجاهز (انسخه والصقه فوق <!-- APPS GO HERE -->)</label>
+    <textarea id="result" readonly></textarea>
+    <button onclick="copyCode()" style="margin-top:10px;background:#38bdf8;color:#020617">نسخ الكود</button>
+  </div>  <div class="note">
+    📁 يجب رفع الملفات بهذا الترتيب:<br>
+    apks/<b>ID</b>/app.apk<br>
+    images/<b>ID</b>/cover.png
+  </div>
+</div><script>
+function generate(){
+  const name = document.getElementById('name').value.trim();
+  const id   = document.getElementById('id').value.trim();
+  const desc = document.getElementById('desc').value.trim();
+  const cat  = document.getElementById('cat').value;
+  const imgF = document.getElementById('img').files[0];
+  const apkF = document.getElementById('apk').files[0];
+
+  if(!name || !id || !desc || !imgF || !apkF){
+    alert('رجاءً املأ جميع الحقول واختر الملفات');
+    return;
+  }
+
+  if(!/^[a-z0-9_]+$/.test(id)){
+    alert('المعرّف ID يجب أن يكون إنكليزي صغير وبدون مسافات');
+    return;
+  }
+
+  const sizeMB = (apkF.size / 1024 / 1024).toFixed(2) + ' MB';
+
+  const html = `<div class="card" data-category="${cat}">
+  <img src="images/${id}/cover.png" alt="${name}">
+  <h3>${name}</h3>
+  <p>${desc}</p>
+  <p>الحجم: ${sizeMB}</p>
+  <a href="apks/${id}/app.apk" download>تحميل التطبيق</a>
+</div>`;
+
+  document.getElementById('result').value = html;
+}
+
+function copyCode(){
+  const t = document.getElementById('result');
+  t.select();
+  document.execCommand('copy');
+  alert('تم نسخ الكود ✔️');
+}
+</script></body>
+</html>
